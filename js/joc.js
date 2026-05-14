@@ -40,10 +40,12 @@ class Joc{
         this.bola.draw(this.ctx);
         this.totxo.draw(this.ctx);
         $(document).on("keydown",{joc:this}, function(e){
-           //Moviment de la pala
+            if (e.which === joc.key.LEFT.code)  joc.key.LEFT.pressed  = true;
+            if (e.which === joc.key.RIGHT.code) joc.key.RIGHT.pressed = true;
         });
         $(document).on("keyup", {joc:this}, function(e){
-            //Moviment de la pala
+            if (e.which === joc.key.LEFT.code)  joc.key.LEFT.pressed  = false;
+            if (e.which === joc.key.RIGHT.code) joc.key.RIGHT.pressed = false;
         });
 
         
