@@ -2,11 +2,10 @@ class Bola {
     constructor(puntPosicio, radi) {
         this.radi = radi;
         this.posicio = puntPosicio;
-        this.vx = 1;
-        this.vy = -1;
+        this.vx = 3;
+        this.vy = -3;
         this.color = "#fff";
-      
-    };
+    }
 
     draw(ctx) {
         ctx.beginPath();
@@ -15,44 +14,52 @@ class Bola {
         ctx.fill();
         ctx.closePath();
     }
-    mou(x,y){
-        this.posicio.x += x;
-        this.posicio.y += y;
-    }
-    update(){
 
+    update() {
         let puntActual = this.posicio;
-        let puntSeguent= new Punt(this.posicio.x + this.vx,
-                            this.posicio.y + this.vy);
-        let trajectoria= new Segment(puntActual, puntSeguent);
+        let puntSeguent = new Punt(this.posicio.x + this.vx,
+                                   this.posicio.y + this.vy);
+        let trajectoria = new Segment(puntActual, puntSeguent);
         let exces;
         let xoc = false;
-        
 
-        //Xoc amb els laterals del canvas
-        //Xoc lateral superior
-        if(trajectoria.puntB.y - this.radi < 0){
-            exces= (trajectoria.puntB.y - this.radi)/this.vy;
-            this.posicio.x = trajectoria.puntB.x - exces*this.vx;
+        // Xoc lateral superior
+        if (trajectoria.puntB.y - this.radi < 0) {
+            exces = (trajectoria.puntB.y - this.radi) / this.vy;
+            this.posicio.x = trajectoria.puntB.x - exces * this.vx;
             this.posicio.y = this.radi;
             xoc = true;
             this.vy = -this.vy;
         }
-        //Xoc lateral dret
-        //Xoc lateral esquerra
-        //Xoc lateral inferior
-      
-        //Xoc amb la pala
+        // Xoc lateral dret
+        if (!xoc && trajectoria.puntB.x + this.radi > joc.amplada) {
+            exces = (trajectoria.puntB.x + this.radi - joc.amplada) / this.vx;
+            this.posicio.x = joc.amplada - this.radi;
+            this.posicio.y = trajectoria.puntB.y - exces * this.vy;
+            xoc = true;
+            this.vx = -this.vx;
+        }
+        // Xoc lateral esquerra
+        if (!xoc && trajectoria.puntB.x - this.radi < 0) {
+            exces = (trajectoria.puntB.x - this.radi) / this.vx;
+            this.posicio.x = this.radi;
+            this.posicio.y = trajectoria.puntB.y - exces * this.vy;
+            xoc = true;
+            this.vx = -this.vx;
+        }
+        // Xoc lateral inferior
+        if (!xoc && trajectoria.puntB.y + this.radi > joc.alcada) {
+            exces = (trajectoria.puntB.y + this.radi - joc.alcada) / this.vy;
+            this.posicio.x = trajectoria.puntB.x - exces * this.vx;
+            this.posicio.y = joc.alcada - this.radi;
+            xoc = true;
+            this.vy = -this.vy;
+        }
 
-        //Xoc amb els totxos del mur
-        //Utilitzem el mètode INTERSECCIOSEGMENTRECTANGLE
-        
-
-        if (!xoc){
+        if (!xoc) {
             this.posicio.x = trajectoria.puntB.x;
             this.posicio.y = trajectoria.puntB.y;
-        }     
-        
+        }
     }
 
     interseccioSegmentRectangle(segment, rectangle){
