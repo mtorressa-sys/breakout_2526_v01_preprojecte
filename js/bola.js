@@ -99,6 +99,7 @@ class Bola {
                     ny - this.radi < t.posicio.y + t.alcada) {
 
                     xoc = true;
+                    t.tocat = true;
                     // Quin costat té menys solapament -> per allà ha entrat
                     const solapSup  = (this.posicio.y + this.radi) - t.posicio.y;
                     const solapInf  = (t.posicio.y + t.alcada) - (this.posicio.y - this.radi);
