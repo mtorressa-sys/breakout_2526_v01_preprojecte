@@ -72,17 +72,14 @@ class Bola {
             let bolaX = trajectoria.puntB.x;
             let bolaY = trajectoria.puntB.y;
 
-            // La bola ve de dalt cap avall (vy > 0) i toca la part superior de la pala
             if (this.vy > 0 &&
                 bolaX + this.radi > pala.posicio.x &&
                 bolaX - this.radi < pala.posicio.x + pala.amplada &&
                 bolaY + this.radi >= pala.posicio.y &&
                 bolaY - this.radi <= pala.posicio.y + pala.alcada) {
 
-                // Col·loquem la bola just a sobre de la pala
                 this.posicio.y = pala.posicio.y - this.radi;
                 this.posicio.x = bolaX;
-                // Invertim direcció vertical -> surt cap amunt
                 this.vy = -this.vy;
                 xoc = true;
             }
@@ -90,6 +87,36 @@ class Bola {
 
         // Xoc amb els totxos del mur
         // Utilitzem el metode interseccioSegmentRectangle
+        if (!xoc) {
+            const nx = trajectoria.puntB.x;
+            const ny = trajectoria.puntB.y;
+            for (let t of joc.mur.totxos) {
+                if (t.tocat) continue;
+                // Comprovació AABB: la bola (cercle) se solapa amb el totxo?
+                if (nx + this.radi > t.posicio.x &&
+                    nx - this.radi < t.posicio.x + t.amplada &&
+                    ny + this.radi > t.posicio.y &&
+                    ny - this.radi < t.posicio.y + t.alcada) {
+
+                    xoc = true;
+                    // Quin costat té menys solapament -> per allà ha entrat
+                    const solapSup  = (this.posicio.y + this.radi) - t.posicio.y;
+                    const solapInf  = (t.posicio.y + t.alcada) - (this.posicio.y - this.radi);
+                    const solapEsq  = (this.posicio.x + this.radi) - t.posicio.x;
+                    const solapDret = (t.posicio.x + t.amplada) - (this.posicio.x - this.radi);
+                    const min = Math.min(solapSup, solapInf, solapEsq, solapDret);
+
+                    if (min === solapSup || min === solapInf) {
+                        this.vy = -this.vy;
+                    } else {
+                        this.vx = -this.vx;
+                    }
+                    this.posicio.x = nx;
+                    this.posicio.y = ny;
+                    break;
+                }
+            }
+        }
 
         if (!xoc) {
             this.posicio.x = trajectoria.puntB.x;
@@ -108,8 +135,16 @@ class Bola {
         let segmentVoraSuperior = new Segment(rectangle.posicio,
             new Punt(rectangle.posicio.x + rectangle.amplada, rectangle.posicio.y));
         // vora inferior
+        let segmentVoraInferior = new Segment(
+            new Punt(rectangle.posicio.x, rectangle.posicio.y + rectangle.alcada),
+            new Punt(rectangle.posicio.x + rectangle.amplada, rectangle.posicio.y + rectangle.alcada));
         // vora esquerra
+        let segmentVoraEsquerra = new Segment(rectangle.posicio,
+            new Punt(rectangle.posicio.x, rectangle.posicio.y + rectangle.alcada));
         // vora dreta
+        let segmentVoraDreta = new Segment(
+            new Punt(rectangle.posicio.x + rectangle.amplada, rectangle.posicio.y),
+            new Punt(rectangle.posicio.x + rectangle.amplada, rectangle.posicio.y + rectangle.alcada));
 
         // vora superior
         puntI = segment.puntInterseccio(segmentVoraSuperior);
@@ -122,8 +157,35 @@ class Bola {
             }
         }
         // vora inferior
+        puntI = segment.puntInterseccio(segmentVoraInferior);
+        if (puntI) {
+            distanciaI = Punt.distanciaDosPunts(segment.puntA, puntI);
+            if (distanciaI < distanciaIMin) {
+                distanciaIMin = distanciaI;
+                puntIMin = puntI;
+                voraI = "inferior";
+            }
+        }
         // vora esquerra
+        puntI = segment.puntInterseccio(segmentVoraEsquerra);
+        if (puntI) {
+            distanciaI = Punt.distanciaDosPunts(segment.puntA, puntI);
+            if (distanciaI < distanciaIMin) {
+                distanciaIMin = distanciaI;
+                puntIMin = puntI;
+                voraI = "esquerra";
+            }
+        }
         // vora dreta
+        puntI = segment.puntInterseccio(segmentVoraDreta);
+        if (puntI) {
+            distanciaI = Punt.distanciaDosPunts(segment.puntA, puntI);
+            if (distanciaI < distanciaIMin) {
+                distanciaIMin = distanciaI;
+                puntIMin = puntI;
+                voraI = "dreta";
+            }
+        }
 
         if (voraI) {
             return { pI: puntIMin, vora: voraI };
