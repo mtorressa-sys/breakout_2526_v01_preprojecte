@@ -6,8 +6,8 @@ class Bola {
     constructor(puntPosicio, radi) {
         this.radi = radi;
         this.posicio = puntPosicio;
-        this.vx = 3;
-        this.vy = -3;
+        this.vx = 5;
+        this.vy = -5;
         this.color = "#fff";
     }
 

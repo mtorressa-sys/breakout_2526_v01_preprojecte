@@ -15,9 +15,9 @@ class Mur {
         const nCols = files[0].length;
         const nFiles = files.length;
 
-        const tW = 28;   // amplada totxo
-        const tH = 8;    // alçada totxo
-        const gap = 3;   // separació entre totxos
+        const tW = 100;   // amplada totxo
+        const tH = 28;    // alçada totxo
+        const gap = 5;   // separació entre totxos
         const margeTop = 20;
         const totalAmplada = nCols * (tW + gap) - gap;
         const margeLeft = (ampladaCanvas - totalAmplada) / 2;

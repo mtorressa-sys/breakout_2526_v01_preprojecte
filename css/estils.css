@@ -16,8 +16,8 @@ body {
 #joc{
 	position:relative;
 	margin-top: 40px;
-	width:740px;
-	height:400px;
+	/*width:740px;
+	height:400px;*/
 	background: rgba(232, 232, 232, 0.5);
 	display: block; 
 	margin: 0 auto;

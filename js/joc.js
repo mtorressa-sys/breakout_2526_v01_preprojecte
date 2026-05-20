@@ -12,8 +12,8 @@ class Joc{
         this.totxoalcada = 10;
         this.totxocolor = 20;
 
-        this.bola = new Bola(new Punt(this.canvas.width/2, this.canvas.height/2), 3);
-        this.pala = new Pala(new Punt((this.canvas.width-60)/2, this.canvas.height-15), 60, 4);
+        this.bola = new Bola(new Punt(this.canvas.width/2, this.canvas.height/2), 8);
+        this.pala = new Pala(new Punt((this.canvas.width-60)/2, this.canvas.height-15), 150, 10);
         this.mur  = new Mur();
         this.mur.generaMur(0, this.amplada);
 
