@@ -13,7 +13,8 @@ class Joc{
         this.totxocolor = 20;
         this.vides = 3;
         this.nivell = nivell;
-        this.esperant = true; // espera que es premi espai per llençar la bola
+        this.esperant = true;
+        this.gameAcabat = false;
 
         this.bola = new Bola(new Punt(this.canvas.width/2, this.canvas.height/2), 8);
         this.pala = new Pala(new Punt((this.canvas.width-150)/2, this.canvas.height-30), 150, 10);
@@ -39,13 +40,25 @@ class Joc{
         this.vides--;
         if (this.vides <= 0) {
             this.esperant = true;
-            this.mostrarGameOver();
+            this.gameAcabat = true;
+            this.mostrarGameOver("Game Over", "Has perdut totes les vides!");
         } else {
             this.resetBola();
         }
     }
 
-    mostrarGameOver(){
+    comprovanGuanya(){
+        const queden = this.mur.totxos.filter(t => !t.tocat);
+        if (queden.length === 0) {
+            this.esperant = true;
+            this.gameAcabat = true;
+            this.mostrarGameOver("Has guanyat!", "Tots els blocs destruïts!");
+        }
+    }
+
+    mostrarGameOver(titol, missatge){
+        $("#overlay-gameover h2").text(titol);
+        $("#overlay-gameover p").text(missatge);
         $("#overlay-gameover").show();
     }
 
@@ -118,6 +131,8 @@ class Joc{
     }
 
     update(){
+        if (this.gameAcabat) return;
+
         // Si esperant, la bola segueix la pala però no es mou sola
         if (this.esperant) {
             this.bola.posicio.x = this.pala.posicio.x + this.pala.amplada / 2;
@@ -128,6 +143,7 @@ class Joc{
         }
         this.bola.update();
         this.pala.update();
+        this.comprovanGuanya();
         this.draw();
     }
 }
