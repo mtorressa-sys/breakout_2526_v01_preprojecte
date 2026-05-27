@@ -4,52 +4,119 @@ body {
     text-align: center;
     background: #333 url(../images/20151006051016_votacion-estrellas-css.jpg);
     color: #eee;
-	background-size: cover;
+    background-size: cover;
+    min-height: 100vh;
 }
 
 #principal{
-	width: 960px;
-	margin: 20px auto;
-  	padding: 20px;
+    width: 960px;
+    margin: 20px auto;
+    padding: 20px;
 }
 
 #joc{
-	position:relative;
-	margin-top: 40px;
-	/*width:740px;
-	height:400px;*/
-	background: rgba(232, 232, 232, 0.5);
-	display: block; 
-	margin: 0 auto;
-}
-#inici, #fi{
-	position:absolute;
-	left: 275px; top: 50px;
-	width: 400px; height: 300px;
-	margin: 200px auto;
-	font-family: Tahoma, Geneva, sans-serif;
-	font-size: 1.3em;
-	text-align:center;
-	border:thick #990 solid;
-	border-radius: 25px;
-	background-color: #CFC;  
-	opacity: 0.9;
-}
-.dreta{
-	text-align:right;
-}
-#game {
-	background-color: #eee;  /* color gris clar  */
-	border: #666 50px solid;
-	border-bottom-width: 0;
-	display: block;
-	margin: 0 auto;
+    position: relative;
+    background: rgba(232, 232, 232, 0.5);
+    display: block; 
+    margin: 0 auto;
 }
 
-#capçalera{
-	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-	font-size: 1.2em;
-	background-color:#A3A352;  /* rgb(163,163,82) */
-	height: 200px;
-	border-radius:25px;
+/* Pantalla d'inici centrada */
+#inici {
+    width: 380px;
+    margin: 120px auto 0 auto;
+    padding: 35px 30px;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 1.3em;
+    text-align: center;
+    border: thick #990 solid;
+    border-radius: 25px;
+    background-color: #CFC;
+    opacity: 0.9;
+    color: #333;
+}
+
+#inici h2 {
+    margin-bottom: 18px;
+    font-size: 1.4em;
+}
+
+#inici p {
+    margin-bottom: 14px;
+}
+
+#nivells {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 22px;
+}
+
+.btn-nivell {
+    padding: 7px 18px;
+    font-size: 0.85em;
+    border: 2px solid #990;
+    border-radius: 10px;
+    background: #fff;
+    cursor: pointer;
+    font-family: Tahoma, Geneva, sans-serif;
+}
+
+.btn-nivell.seleccionat {
+    background: #990;
+    color: #fff;
+}
+
+.btn-nivell:hover {
+    background: #bb0;
+    color: #fff;
+}
+
+#btn-comecar {
+    padding: 10px 30px;
+    font-size: 1em;
+    background: #D30;
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-family: Tahoma, Geneva, sans-serif;
+}
+
+#btn-comecar:hover {
+    background: #a00;
+}
+
+#fi {
+    position: absolute;
+    left: 275px; top: 50px;
+    width: 400px; height: 300px;
+    margin: 200px auto;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 1.3em;
+    text-align: center;
+    border: thick #990 solid;
+    border-radius: 25px;
+    background-color: #CFC;
+    opacity: 0.9;
+}
+
+.dreta {
+    text-align: right;
+}
+
+#game {
+    background-color: #eee;
+    border: #666 50px solid;
+    border-bottom-width: 0;
+    display: block;
+    margin: 0 auto;
+}
+
+#capçalera {
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    font-size: 1.2em;
+    background-color: #A3A352;
+    height: 200px;
+    border-radius: 25px;
 }

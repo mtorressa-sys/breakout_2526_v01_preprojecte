@@ -3,7 +3,7 @@
 */
 
 class Joc{
-    constructor(canvas,ctx) {
+    constructor(canvas, ctx, nivell=0) {
         this.canvas = canvas;
         this.ctx = ctx;
         this.amplada = canvas.width;
@@ -13,9 +13,9 @@ class Joc{
         this.totxocolor = 20;
 
         this.bola = new Bola(new Punt(this.canvas.width/2, this.canvas.height/2), 8);
-        this.pala = new Pala(new Punt((this.canvas.width-60)/2, this.canvas.height-15), 150, 10);
+        this.pala = new Pala(new Punt((this.canvas.width-150)/2, this.canvas.height-15), 150, 10);
         this.mur  = new Mur();
-        this.mur.generaMur(0, this.amplada);
+        this.mur.generaMur(nivell, this.amplada);
 
         this.key = {
             LEFT: {code:37, pressed:false},
