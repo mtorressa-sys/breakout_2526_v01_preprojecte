@@ -8,8 +8,9 @@
 <body>
     <div id="principal">
 
+        <!-- Pantalla d'inici -->
         <div id="inici">
-            <h2> BreakOut 25-26</h2>
+            <h2>BreakOut 25-26</h2>
             <p>Tria el nivell:</p>
             <div id="nivells">
                 <button class="btn-nivell seleccionat" data-nivell="0">Nivell 1</button>
@@ -19,7 +20,20 @@
             <button id="btn-comecar">Començar</button>
         </div>
 
-        <canvas id="joc" style="display:none;"></canvas>
+        <!-- Contenidor joc + overlay -->
+        <div id="joc-wrap" style="display:none; position:relative; width:fit-content; margin:0 auto;">
+            <canvas id="joc"></canvas>
+
+            <!-- Overlay Game Over -->
+            <div id="overlay-gameover">
+                <h2>Game Over</h2>
+                <p>Vols tornar a intentar-ho?</p>
+                <div id="btns-gameover">
+                    <button id="btn-reiniciar">Tornar a jugar</button>
+                    <button id="btn-setup">Setup</button>
+                </div>
+            </div>
+        </div>
 
     </div>
 </body>

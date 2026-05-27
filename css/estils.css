@@ -120,3 +120,54 @@ body {
     height: 200px;
     border-radius: 25px;
 }
+
+/* Overlay Game Over */
+#overlay-gameover {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 360px;
+    padding: 35px 30px;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 1.2em;
+    text-align: center;
+    border: thick #990 solid;
+    border-radius: 25px;
+    background-color: #CFC;
+    opacity: 0.95;
+    color: #333;
+    z-index: 10;
+}
+#overlay-gameover h2 {
+    font-size: 1.5em;
+    margin-bottom: 12px;
+}
+#overlay-gameover p {
+    margin-bottom: 20px;
+}
+#btns-gameover {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+#btns-gameover button {
+    padding: 9px 22px;
+    font-size: 0.9em;
+    border: 2px solid #990;
+    border-radius: 12px;
+    cursor: pointer;
+    font-family: Tahoma, Geneva, sans-serif;
+}
+#btn-reiniciar {
+    background: #D30;
+    color: #fff;
+    border-color: #D30;
+}
+#btn-reiniciar:hover { background: #a00; }
+#btn-setup {
+    background: #fff;
+    color: #333;
+}
+#btn-setup:hover { background: #990; color: #fff; }

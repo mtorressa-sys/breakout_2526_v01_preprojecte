@@ -14,7 +14,7 @@ $(document).ready(function() {
 
     $("#btn-comecar").on("click", function() {
         $("#inici").hide();
-        $("#joc").show();
+        $("#joc-wrap").show();
 
         let myCanvas = document.getElementById("joc");
         let ctx = myCanvas.getContext("2d");

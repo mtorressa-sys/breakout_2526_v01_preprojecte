@@ -56,13 +56,10 @@ class Bola {
             xoc = true;
             this.vx = -this.vx;
         }
-        // Xoc lateral inferior (perd vida - de moment rebota)
+        // Xoc lateral inferior (perd vida)
         if (!xoc && trajectoria.puntB.y + this.radi > joc.alcada) {
-            exces = (trajectoria.puntB.y + this.radi - joc.alcada) / this.vy;
-            this.posicio.x = trajectoria.puntB.x - exces * this.vx;
-            this.posicio.y = joc.alcada - this.radi;
             xoc = true;
-            this.vy = -this.vy;
+            joc.perdaVida();
         }
 
         // Xoc amb la pala
