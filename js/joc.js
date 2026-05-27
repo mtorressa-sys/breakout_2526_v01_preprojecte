@@ -122,6 +122,7 @@ class Joc{
         $("#btn-reiniciar").on("click", function(){
             $("#overlay-gameover").hide();
             joc.vides = 3;
+            joc.gameAcabat = false;
             joc.mur.generaMur(joc.nivell, joc.amplada);
             joc.resetBola();
         });
