@@ -31,7 +31,7 @@ class Joc{
     resetBola(){
         this.bola.posicio.x = this.pala.posicio.x + this.pala.amplada / 2;
         this.bola.posicio.y = this.pala.posicio.y - this.bola.radi - 2;
-        this.bola.vx = 8;
+        this.bola.vx = Math.random() < 0.5 ? 8 : -8;
         this.bola.vy = -8;
         this.esperant = true;
     }
