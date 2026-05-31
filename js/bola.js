@@ -97,6 +97,7 @@ class Bola {
 
                     xoc = true;
                     t.vida--;
+                    joc.punts += t.punts;
                     if (t.vida <= 0) {
                         // Sense vides -> desapareix
                         t.tocat = true;

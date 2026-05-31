@@ -12,6 +12,7 @@ class Joc{
         this.totxoalcada = 10;
         this.totxocolor = 20;
         this.vides = 3;
+        this.punts = 0;
         this.nivell = nivell;
         this.esperant = true;
         this.gameAcabat = false;
@@ -68,6 +69,7 @@ class Joc{
         this.pala.draw(this.ctx);
         this.bola.draw(this.ctx);
         this.dibuixaVides();
+        this.dibuixaPunts();
         if (this.esperant) {
             this.dibuixaMissatgeEspai();
         }
@@ -85,6 +87,15 @@ class Joc{
             this.ctx.arc(85 + i * 28, 18, 10, 0, 2 * Math.PI);
             this.ctx.fill();
         }
+        this.ctx.restore();
+    }
+
+    dibuixaPunts(){
+        this.ctx.save();
+        this.ctx.font = "bold 18px Tahoma";
+        this.ctx.fillStyle = "#fff";
+        this.ctx.textAlign = "right";
+        this.ctx.fillText("Punts: " + this.punts, this.amplada - 15, 25);
         this.ctx.restore();
     }
 
@@ -122,6 +133,7 @@ class Joc{
         $("#btn-reiniciar").on("click", function(){
             $("#overlay-gameover").hide();
             joc.vides = 3;
+            joc.punts = 0;
             joc.gameAcabat = false;
             joc.mur.generaMur(joc.nivell, joc.amplada);
             joc.resetBola();

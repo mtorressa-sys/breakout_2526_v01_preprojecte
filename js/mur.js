@@ -71,7 +71,7 @@ class Mur {
             {
                 // Nivell 3: 3 vides, verd -> vermell -> blau
                 vides: 3,
-                colors: [ "#8D1", "#D30", "#4CF"],
+                colors: ["#8D1", "#D30", "#4CF"],
                 totxos:[
                     "aaaaaa",
                     "a    a",
