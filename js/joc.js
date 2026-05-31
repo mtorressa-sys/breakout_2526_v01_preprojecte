@@ -27,6 +27,16 @@ class Joc{
             RIGHT: {code:39, pressed:false},
             SPACE: {code:32, pressed:false}
         };
+
+        // Àudio
+        this.soFons     = new Audio("so/melodiafons.m4a");
+        this.soFons.loop = true;
+        this.soFons.volume = 0.5;
+        this.soGuanyar  = new Audio("so/guanyar.mp3");
+        this.soPerdre   = new Audio("so/perdre.mp3");
+        this.soXoc      = new Audio("so/xoc.mp3");
+        this.soCaure    = new Audio("so/caure.mp3");
+        this.musicaIniciada = false;
     }
 
     resetBola(){
@@ -58,6 +68,13 @@ class Joc{
     }
 
     mostrarGameOver(titol, missatge){
+        this.soFons.pause();
+        this.soFons.currentTime = 0;
+        if (titol.includes("guanyat")) {
+            this.soGuanyar.play();
+        } else {
+            this.soPerdre.play();
+        }
         $("#overlay-gameover h2").text(titol);
         $("#overlay-gameover p").text(missatge);
         $("#overlay-gameover").show();
@@ -121,6 +138,10 @@ class Joc{
             if (e.which === joc.key.RIGHT.code) joc.key.RIGHT.pressed = true;
             if (e.which === joc.key.SPACE.code && joc.esperant) {
                 joc.esperant = false;
+                if (!joc.musicaIniciada) {
+                    joc.soFons.play();
+                    joc.musicaIniciada = true;
+                }
                 e.preventDefault();
             }
         });
@@ -131,15 +152,20 @@ class Joc{
 
         // Botons del game over
         $("#btn-reiniciar").on("click", function(){
+            soNivell.currentTime = 0;
+            soNivell.play();
             $("#overlay-gameover").hide();
             joc.vides = 3;
             joc.punts = 0;
             joc.gameAcabat = false;
+            joc.musicaIniciada = false;
             joc.mur.generaMur(joc.nivell, joc.amplada);
             joc.resetBola();
         });
         $("#btn-setup").on("click", function(){
-            location.reload();
+            soNivell.currentTime = 0;
+            soNivell.play();
+            setTimeout(() => location.reload(), 200);
         });
     }
 

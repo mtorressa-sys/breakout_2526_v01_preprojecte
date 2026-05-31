@@ -3,6 +3,8 @@
 */
 
 let nivellSeleccionat = 0;
+const soNivell    = new Audio("so/nivells.mp3");
+const soComençar  = new Audio("so/començar.mp3");
 
 $(document).ready(function() {
 
@@ -10,9 +12,16 @@ $(document).ready(function() {
         $(".btn-nivell").removeClass("seleccionat");
         $(this).addClass("seleccionat");
         nivellSeleccionat = parseInt($(this).data("nivell"));
+        // So clic nivell
+        soNivell.currentTime = 0;
+        soNivell.play();
     });
 
     $("#btn-comecar").on("click", function() {
+        // So clic començar
+        soComençar.currentTime = 0;
+        soComençar.play();
+
         $("#inici").hide();
         $("#joc-wrap").show();
 

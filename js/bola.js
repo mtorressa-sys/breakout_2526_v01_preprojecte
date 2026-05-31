@@ -59,6 +59,8 @@ class Bola {
         // Xoc lateral inferior (perd vida)
         if (!xoc && trajectoria.puntB.y + this.radi > joc.alcada) {
             xoc = true;
+            joc.soCaure.currentTime = 0;
+            joc.soCaure.play();
             joc.perdaVida();
         }
 
@@ -98,6 +100,9 @@ class Bola {
                     xoc = true;
                     t.vida--;
                     joc.punts += t.punts;
+                    // So de xoc amb totxo
+                    joc.soXoc.currentTime = 0;
+                    joc.soXoc.play();
                     if (t.vida <= 0) {
                         // Sense vides -> desapareix
                         t.tocat = true;
