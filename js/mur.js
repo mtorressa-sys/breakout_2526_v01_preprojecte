@@ -28,7 +28,9 @@ class Mur {
                     const x = margeLeft + c * (tW + gap);
                     const y = margeTop + f * (tH + gap);
                     let t = new Totxo(new Punt(x, y), tW, tH);
-                    t.color = nivel.color;
+                    t.vida = nivel.vides;       // vides que li queden
+                    t.colors = nivel.colors;    // array de colors
+                    t.color = nivel.colors[0];  // color inicial (màxima vida)
                     t.punts = 10;
                     this.totxos.push(t);
                 }
@@ -45,7 +47,9 @@ class Mur {
     defineixNivells(){
         this.nivells=[
             {
-                color: "#4CF",
+                // Nivell 1: 1 vida, color blau
+                vides: 1,
+                colors: ["#4CF"],
                 totxos:[
                     "aaaaaa",
                     "aaaaaa",
@@ -54,7 +58,9 @@ class Mur {
                 ]
             },
             {
-                color: "#8D1",
+                // Nivell 2: 2 vides, vermell -> blau
+                vides: 2,
+                colors: ["#D30", "#4CF"],
                 totxos:[
                     "aaaaaa",
                     " aaaa ",
@@ -63,7 +69,9 @@ class Mur {
                 ]
             },
             {
-                color: "#D30",
+                // Nivell 3: 3 vides, verd -> vermell -> blau
+                vides: 3,
+                colors: [ "#8D1", "#D30", "#4CF"],
                 totxos:[
                     "aaaaaa",
                     "a    a",

@@ -96,7 +96,14 @@ class Bola {
                     ny - this.radi < t.posicio.y + t.alcada) {
 
                     xoc = true;
-                    t.tocat = true;
+                    t.vida--;
+                    if (t.vida <= 0) {
+                        // Sense vides -> desapareix
+                        t.tocat = true;
+                    } else {
+                        // Canvia al color de la vida restant
+                        t.color = t.colors[t.colors.length - t.vida];
+                    }
                      // Quin costat té menys solapament -> per allà ha entrat
                     const solapSup  = (this.posicio.y + this.radi) - t.posicio.y;
                     const solapInf  = (t.posicio.y + t.alcada) - (this.posicio.y - this.radi);
