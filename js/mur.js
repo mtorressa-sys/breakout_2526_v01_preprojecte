@@ -15,10 +15,10 @@ class Mur {
         const nCols = files[0].length;
         const nFiles = files.length;
 
-        const tW = 100;   // amplada totxo
-        const tH = 28;    // alçada totxo
-        const gap = 5;   // separació entre totxos
-        const margeTop = 20;
+        const tW = 70;    // amplada totxo
+        const tH = 18;    // alçada totxo
+        const gap = 4;    // separació entre totxos
+        const margeTop = 50;  // espai per vides i punts
         const totalAmplada = nCols * (tW + gap) - gap;
         const margeLeft = (ampladaCanvas - totalAmplada) / 2;
 
@@ -47,36 +47,46 @@ class Mur {
     defineixNivells(){
         this.nivells=[
             {
-                // Nivell 1: 1 vida, color blau
+                // Nivell 1: rectangle complet 12x6, 1 vida, color blau
                 vides: 1,
                 colors: ["#4CF"],
                 totxos:[
-                    "aaaaaa",
-                    "aaaaaa",
-                    "aaaaaa",
-                    "aaaaaa",
+                    "aaaaaaaaaaaa",
+                    "aaaaaaaaaaaa",
+                    "aaaaaaaaaaaa",
+                    "aaaaaaaaaaaa",
+                    "aaaaaaaaaaaa",
+                    "aaaaaaaaaaaa",
                 ]
             },
             {
-                // Nivell 2: 2 vides, vermell -> blau
+                // Nivell 2: espiral, 2 vides, vermell -> blau
                 vides: 2,
                 colors: ["#D30", "#4CF"],
                 totxos:[
-                    "aaaaaa",
-                    " aaaa ",
-                    " aaaa ",
-                    "aaaaaa",
+                    "aaaaaaaaaaaa",
+                    "a          a",
+                    "a  aaaaaa  a",
+                    "a  a    a  a",
+                    "a  a    a  a",
+                    "a  aaaaaa  a",
+                    "a          a",
+                    "aaaaaaaaaaaa",
                 ]
             },
             {
-                // Nivell 3: 3 vides, verd -> vermell -> blau
+                // Nivell 3: Space Invader, 3 vides, verd -> vermell -> blau
                 vides: 3,
                 colors: ["#8D1", "#D30", "#4CF"],
                 totxos:[
-                    "aaaaaa",
-                    "a    a",
-                    "a    a",
-                    "aaaaaa",
+                    " a       a ",
+                    "  a     a  ",
+                    " aaaaaaaa  ",
+                    "aa aaaaa aa",
+                    "aaaaaaaaaaa",
+                    "a aaaaaaa a",
+                    "a a     a a",
+                    "   aa aa   ",
                 ]
             }
         ];
