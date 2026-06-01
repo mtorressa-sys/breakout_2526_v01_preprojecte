@@ -171,3 +171,44 @@ body {
     color: #333;
 }
 #btn-setup:hover { background: #990; color: #fff; }
+
+/* Input nom */
+#input-nom {
+    display: block;
+    margin: 0 auto 18px auto;
+    padding: 7px 12px;
+    font-size: 1em;
+    font-family: Tahoma, Geneva, sans-serif;
+    border: 2px solid #990;
+    border-radius: 10px;
+    width: 200px;
+    text-align: center;
+}
+
+/* Records */
+#records {
+    margin-top: 18px;
+    border-top: 2px solid #990;
+    padding-top: 12px;
+}
+#records h3 {
+    font-size: 1em;
+    margin-bottom: 8px;
+}
+#llista-records {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.85em;
+}
+#llista-records li {
+    display: flex;
+    justify-content: space-between;
+    padding: 3px 10px;
+    border-radius: 6px;
+}
+#llista-records li:nth-child(odd) {
+    background: rgba(0,0,0,0.08);
+}
+#llista-records li span.nom  { text-align: left; font-weight: bold; }
+#llista-records li span.pts  { text-align: right; color: #D30; font-weight: bold; }

@@ -11,13 +11,23 @@
         <!-- Pantalla d'inici -->
         <div id="inici">
             <h2>BreakOut 25-26</h2>
+
+            <p>Introdueix el teu nom:</p>
+            <input type="text" id="input-nom" placeholder="Nom d'usuari" maxlength="20">
+
             <p>Tria el nivell:</p>
             <div id="nivells">
                 <button class="btn-nivell seleccionat" data-nivell="0">Nivell 1</button>
                 <button class="btn-nivell" data-nivell="1">Nivell 2</button>
                 <button class="btn-nivell" data-nivell="2">Nivell 3</button>
             </div>
+
             <button id="btn-comecar">Començar</button>
+
+            <div id="records">
+                <h3>Top 5 records</h3>
+                <ol id="llista-records"></ol>
+            </div>
         </div>
 
         <!-- Contenidor joc + overlay -->

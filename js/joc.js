@@ -13,6 +13,9 @@ class Joc{
         this.totxocolor = 20;
         this.vides = 3;
         this.punts = 0;
+        this.bonus = 500;       // bonus inicial de temps
+        this.temps = 0;         // segons jugats
+        this.intervalTemps = null;
         this.nivell = nivell;
         this.esperant = true;
         this.gameAcabat = false;
@@ -70,13 +73,22 @@ class Joc{
     mostrarGameOver(titol, missatge){
         this.soFons.pause();
         this.soFons.currentTime = 0;
+        // Parar cronòmetre
+        clearInterval(this.intervalTemps);
+        this.intervalTemps = null;
         if (titol.includes("guanyat")) {
             this.soGuanyar.play();
+            // Sumar bonus de temps a la puntuació final
+            this.punts += this.bonus;
         } else {
             this.soPerdre.play();
         }
+        // Guardar record
+        if (this.punts > 0) {
+            guardarRecord(nomJugador, this.punts);
+        }
         $("#overlay-gameover h2").text(titol);
-        $("#overlay-gameover p").text(missatge);
+        $("#overlay-gameover p").text(missatge + " Puntuació final: " + this.punts);
         $("#overlay-gameover").show();
     }
 
@@ -87,6 +99,7 @@ class Joc{
         this.bola.draw(this.ctx);
         this.dibuixaVides();
         this.dibuixaPunts();
+        this.dibuixaTemps();
         if (this.esperant) {
             this.dibuixaMissatgeEspai();
         }
@@ -116,6 +129,15 @@ class Joc{
         this.ctx.restore();
     }
 
+    dibuixaTemps(){
+        this.ctx.save();
+        this.ctx.font = "bold 18px Tahoma";
+        this.ctx.fillStyle = "#fff";
+        this.ctx.textAlign = "center";
+        this.ctx.fillText("⏱ " + this.temps + "s  |  Bonus: " + this.bonus, this.amplada / 2, 25);
+        this.ctx.restore();
+    }
+
     dibuixaMissatgeEspai(){
         this.ctx.save();
         this.ctx.font = "bold 22px Tahoma";
@@ -142,6 +164,13 @@ class Joc{
                     joc.soFons.play();
                     joc.musicaIniciada = true;
                 }
+                // Arrancar cronòmetre si no estava en marxa
+                if (!joc.intervalTemps) {
+                    joc.intervalTemps = setInterval(function() {
+                        joc.temps++;
+                        joc.bonus = Math.max(0, 500 - joc.temps * 2);
+                    }, 1000);
+                }
                 e.preventDefault();
             }
         });
@@ -152,11 +181,15 @@ class Joc{
 
         // Botons del game over
         $("#btn-reiniciar").on("click", function(){
-            soNivell.currentTime = 0;
-            soNivell.play();
+            joc.soNivell.currentTime = 0;
+            joc.soNivell.play();
             $("#overlay-gameover").hide();
             joc.vides = 3;
             joc.punts = 0;
+            joc.bonus = 500;
+            joc.temps = 0;
+            clearInterval(joc.intervalTemps);
+            joc.intervalTemps = null;
             joc.gameAcabat = false;
             joc.musicaIniciada = false;
             joc.mur.generaMur(joc.nivell, joc.amplada);
