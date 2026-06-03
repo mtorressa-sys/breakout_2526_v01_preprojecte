@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'Press Start 2P';
+    src: url('../fonts/PressStart2P-Regular.ttf') format('truetype');
+}
+
 * { padding: 0; margin: 0; }
 
 body {
@@ -8,102 +13,225 @@ body {
     min-height: 100vh;
 }
 
-#principal{
+#principal {
     width: 960px;
     margin: 20px auto;
     padding: 20px;
 }
 
-#joc{
+#joc {
     position: relative;
     background: rgba(232, 232, 232, 0.5);
-    display: block; 
+    display: block;
     margin: 0 auto;
 }
 
-/* Pantalla d'inici centrada */
+/* =====================
+   PANTALLA D'INICI
+   ===================== */
 #inici {
-    width: 380px;
-    margin: 120px auto 0 auto;
-    padding: 35px 30px;
-    font-family: Tahoma, Geneva, sans-serif;
-    font-size: 1.3em;
+    width: 420px;
+    margin: 60px auto 0 auto;
+    padding: 30px 28px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.7em;
     text-align: center;
-    border: thick #990 solid;
-    border-radius: 25px;
-    background-color: #CFC;
-    opacity: 0.9;
-    color: #333;
+    border: 4px solid #0ff;
+    background-color: rgba(0, 0, 20, 0.92);
+    color: #0ff;
+    box-shadow: 0 0 20px #0ff, 0 0 40px #00f, inset 0 0 20px rgba(0,255,255,0.05);
+    image-rendering: pixelated;
 }
 
 #inici h2 {
-    margin-bottom: 18px;
-    font-size: 1.4em;
+    font-size: 1.3em;
+    margin-bottom: 20px;
+    color: #ff0;
+    text-shadow: 0 0 10px #ff0, 0 0 20px #f80;
+    letter-spacing: 2px;
 }
 
 #inici p {
-    margin-bottom: 14px;
+    margin-bottom: 10px;
+    color: #0ff;
+    font-size: 0.85em;
 }
 
+/* Input nom */
+#input-nom {
+    display: block;
+    margin: 0 auto 20px auto;
+    padding: 8px 12px;
+    font-size: 0.9em;
+    font-family: 'Press Start 2P', monospace;
+    border: 2px solid #0ff;
+    border-radius: 0;
+    width: 220px;
+    text-align: center;
+    background: #000;
+    color: #0ff;
+    outline: none;
+    box-shadow: 0 0 8px #0ff;
+}
+#input-nom:focus {
+    box-shadow: 0 0 14px #0ff;
+}
+
+/* Botons de nivell */
 #nivells {
     display: flex;
     justify-content: center;
-    gap: 10px;
-    margin-bottom: 22px;
+    gap: 8px;
+    margin-bottom: 20px;
 }
 
 .btn-nivell {
-    padding: 7px 18px;
-    font-size: 0.85em;
-    border: 2px solid #990;
-    border-radius: 10px;
-    background: #fff;
+    padding: 8px 14px;
+    font-size: 0.75em;
+    border: 2px solid #0ff;
+    border-radius: 0;
+    background: #000;
+    color: #0ff;
     cursor: pointer;
-    font-family: Tahoma, Geneva, sans-serif;
+    font-family: 'Press Start 2P', monospace;
+    transition: background 0.1s, color 0.1s;
 }
 
-.btn-nivell.seleccionat {
-    background: #990;
-    color: #fff;
-}
-
+.btn-nivell.seleccionat,
 .btn-nivell:hover {
-    background: #bb0;
-    color: #fff;
+    background: #0ff;
+    color: #000;
 }
 
+/* Botó Començar */
 #btn-comecar {
-    padding: 10px 30px;
-    font-size: 1em;
-    background: #D30;
-    color: #fff;
-    border: none;
-    border-radius: 12px;
+    display: block;
+    margin: 0 auto 20px auto;
+    padding: 12px 28px;
+    font-size: 0.85em;
+    background: #000;
+    color: #ff0;
+    border: 3px solid #ff0;
+    border-radius: 0;
     cursor: pointer;
-    font-family: Tahoma, Geneva, sans-serif;
+    font-family: 'Press Start 2P', monospace;
+    box-shadow: 0 0 10px #ff0;
+    transition: background 0.1s;
 }
-
 #btn-comecar:hover {
-    background: #a00;
+    background: #ff0;
+    color: #000;
 }
 
-#fi {
+/* Records */
+#records {
+    margin-top: 16px;
+    border-top: 2px solid #0ff;
+    padding-top: 12px;
+}
+#records h3 {
+    font-size: 0.9em;
+    margin-bottom: 10px;
+    color: #ff0;
+    text-shadow: 0 0 8px #ff0;
+}
+#llista-records {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.75em;
+}
+#llista-records li {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 8px;
+    border-bottom: 1px solid rgba(0,255,255,0.15);
+}
+#llista-records li span.nom { text-align: left; color: #fff; }
+#llista-records li span.pts { text-align: right; color: #f0f; text-shadow: 0 0 6px #f0f; }
+
+/* =====================
+   OVERLAY GAME OVER / WIN
+   ===================== */
+#overlay-gameover {
+    display: none;
     position: absolute;
-    left: 275px; top: 50px;
-    width: 400px; height: 300px;
-    margin: 200px auto;
-    font-family: Tahoma, Geneva, sans-serif;
-    font-size: 1.3em;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 380px;
+    padding: 30px 25px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.65em;
     text-align: center;
-    border: thick #990 solid;
-    border-radius: 25px;
-    background-color: #CFC;
-    opacity: 0.9;
+    border: 4px solid #0ff;
+    background-color: rgba(0, 0, 20, 0.95);
+    color: #0ff;
+    box-shadow: 0 0 20px #0ff, 0 0 40px #00f;
+    z-index: 10;
+}
+#overlay-gameover h2 {
+    font-size: 1.4em;
+    margin-bottom: 14px;
+    color: #ff0;
+    text-shadow: 0 0 10px #ff0, 0 0 20px #f80;
+}
+#overlay-gameover p {
+    margin-bottom: 20px;
+    color: #fff;
+    line-height: 1.8em;
+}
+#btns-gameover {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+#btns-gameover button {
+    padding: 9px 16px;
+    font-size: 0.8em;
+    border: 2px solid #0ff;
+    border-radius: 0;
+    cursor: pointer;
+    font-family: 'Press Start 2P', monospace;
+    background: #000;
+    color: #0ff;
+    transition: background 0.1s;
+}
+#btns-gameover button:hover {
+    background: #0ff;
+    color: #000;
+}
+#btn-reiniciar {
+    border-color: #f00;
+    color: #f00;
+    box-shadow: 0 0 8px #f00;
+}
+#btn-reiniciar:hover {
+    background: #f00;
+    color: #000;
+}
+#btn-seguent {
+    border-color: #0f0;
+    color: #0f0;
+    box-shadow: 0 0 8px #0f0;
+}
+#btn-seguent:hover {
+    background: #0f0;
+    color: #000;
+}
+#btn-setup {
+    border-color: #ff0;
+    color: #ff0;
+    box-shadow: 0 0 8px #ff0;
+}
+#btn-setup:hover {
+    background: #ff0;
+    color: #000;
 }
 
-.dreta {
-    text-align: right;
-}
+/* Altres */
+.dreta { text-align: right; }
 
 #game {
     background-color: #eee;
@@ -120,95 +248,3 @@ body {
     height: 200px;
     border-radius: 25px;
 }
-
-/* Overlay Game Over */
-#overlay-gameover {
-    display: none;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 360px;
-    padding: 35px 30px;
-    font-family: Tahoma, Geneva, sans-serif;
-    font-size: 1.2em;
-    text-align: center;
-    border: thick #990 solid;
-    border-radius: 25px;
-    background-color: #CFC;
-    opacity: 0.95;
-    color: #333;
-    z-index: 10;
-}
-#overlay-gameover h2 {
-    font-size: 1.5em;
-    margin-bottom: 12px;
-}
-#overlay-gameover p {
-    margin-bottom: 20px;
-}
-#btns-gameover {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-}
-#btns-gameover button {
-    padding: 9px 22px;
-    font-size: 0.9em;
-    border: 2px solid #990;
-    border-radius: 12px;
-    cursor: pointer;
-    font-family: Tahoma, Geneva, sans-serif;
-}
-#btn-reiniciar {
-    background: #D30;
-    color: #fff;
-    border-color: #D30;
-}
-#btn-reiniciar:hover { background: #a00; }
-#btn-setup {
-    background: #fff;
-    color: #333;
-}
-#btn-setup:hover { background: #990; color: #fff; }
-
-/* Input nom */
-#input-nom {
-    display: block;
-    margin: 0 auto 18px auto;
-    padding: 7px 12px;
-    font-size: 1em;
-    font-family: Tahoma, Geneva, sans-serif;
-    border: 2px solid #990;
-    border-radius: 10px;
-    width: 200px;
-    text-align: center;
-}
-
-/* Records */
-#records {
-    margin-top: 18px;
-    border-top: 2px solid #990;
-    padding-top: 12px;
-}
-#records h3 {
-    font-size: 1em;
-    margin-bottom: 8px;
-}
-#llista-records {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    font-size: 0.85em;
-}
-#llista-records li {
-    display: flex;
-    justify-content: space-between;
-    padding: 3px 10px;
-    border-radius: 6px;
-}
-#llista-records li:nth-child(odd) {
-    background: rgba(0,0,0,0.08);
-}
-#llista-records li span.nom  { text-align: left; font-weight: bold; }
-#llista-records li span.pts  { text-align: right; color: #D30; font-weight: bold; }

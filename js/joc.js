@@ -80,8 +80,15 @@ class Joc{
             this.soGuanyar.play();
             // Sumar bonus de temps a la puntuació final
             this.punts += this.bonus;
+            // Mostrar botó de seguent nivell si no estem al darrer
+            if (this.nivell < 2) {
+                $("#btn-seguent").show();
+            } else {
+                $("#btn-seguent").hide();
+            }
         } else {
             this.soPerdre.play();
+            $("#btn-seguent").hide();
         }
         // Guardar record
         if (this.punts > 0) {
@@ -181,9 +188,10 @@ class Joc{
 
         // Botons del game over
         $("#btn-reiniciar").on("click", function(){
-            joc.soNivell.currentTime = 0;
-            joc.soNivell.play();
+            soNivell.currentTime = 0;
+            soNivell.play();
             $("#overlay-gameover").hide();
+            $("#btn-seguent").hide();
             joc.vides = 3;
             joc.punts = 0;
             joc.bonus = 500;
@@ -193,6 +201,26 @@ class Joc{
             joc.gameAcabat = false;
             joc.musicaIniciada = false;
             joc.mur.generaMur(joc.nivell, joc.amplada);
+            joc.resetBola();
+        });
+        $("#btn-seguent").on("click", function(){
+            soNivell.currentTime = 0;
+            soNivell.play();
+            $("#overlay-gameover").hide();
+            $("#btn-seguent").hide();
+            const puntsSalsats = joc.punts;
+            const videsActuals = joc.vides;
+            const nivellSeguent = joc.nivell + 1;
+            joc.nivell = nivellSeguent;
+            joc.vides = videsActuals;       // manté les vides actuals
+            joc.punts = puntsSalsats;       // manté la puntuació acumulada
+            joc.bonus = 500;
+            joc.temps = 0;
+            clearInterval(joc.intervalTemps);
+            joc.intervalTemps = null;
+            joc.gameAcabat = false;
+            joc.musicaIniciada = false;
+            joc.mur.generaMur(nivellSeguent, joc.amplada);
             joc.resetBola();
         });
         $("#btn-setup").on("click", function(){
